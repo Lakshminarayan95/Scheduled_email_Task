@@ -1,0 +1,21 @@
+{
+  "name": "schedule_email_task",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --use-strict ./src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "moment": "^2.29.1",
+    "mongoose": "^5.13.2",
+    "node-cron": "^3.0.0",
+    "nodemailer": "^6.6.3",
+    "request": "^2.88.2",
+    "validator": "^13.6.0"
+  }
+}
