@@ -62,8 +62,16 @@ route.get('/getUndelivered_email', (req, res) => {
     }).catch((error) => {
         res.status(error.status || 500).json(error);
     });
+}); 
+
+// Delete Data from DB
+route.get('/remove_record/:_id', (req, res) => {
+    taskService.remove_record().then((result) => {
+        res.status(201).json(result);
+    }).catch((error) => {
+        res.status(error.status || 500).json(error);
+    });
 });
 
 
 module.exports = route;
-

@@ -30,3 +30,7 @@ exports.updateByCondition = (condition, updateFields) => {
 exports.getByConditions = (conditions) => {
     return schemaModel.find(conditions);
 }
+
+exports.deleteData = (conditions) => {
+    return schemaModel.deleteOne(conditions);
+}

@@ -193,6 +193,30 @@ const taskService = {
         }
     },
 
+    async getUndelivered_email(params) {
+        try {
+            if (!params) {
+                return Promise.reject(res.error(406, 'Please enter proper Object Id'));
+            }
+            const conditions = {
+                _id: params._id
+            }
+            const getObj = await queryDAO.getByConditions(conditions)
+            console.log("unDeliveredList", unDeliveredList)
+            
+            if (getObj.length > 0) {
+                const response = await queryDAO.deleteData(conditions)
+                console.log("response", response)
+
+                return Promise.resolve({ status: 200, message: 'Data Deleted Successfully' });
+            } else {
+                return Promise.reject({ status: 404, message: 'No Record found' });
+            }
+        } catch (error) {
+            return Promise.reject(res.error(500, error.message, error.stack));
+        }
+    },
+
 
 }
 module.exports = taskService;
