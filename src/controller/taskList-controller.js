@@ -12,6 +12,7 @@ route.post('/create_email_data', (req, res) => {
     });
 })
 
+// To Get All Data
 route.get('/getList', (req, res) => {
     taskService.getList().then((result) => {
         res.status(201).json(result);
@@ -20,6 +21,7 @@ route.get('/getList', (req, res) => {
     });
 })
 
+// Rescheduling Email Deliver Date
 route.put('/Reschedule_deliver/:_id', (req, res) => {
     taskService.Reschedule_deliver(req.params, req.body).then((result) => {
         res.status(201).json(result);

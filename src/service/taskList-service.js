@@ -35,7 +35,6 @@ const taskService = {
         }
     },
 
-    // Get Sales Incharge Details  
     async getList() {
         try {
             const data = await queryDAO.getData();
@@ -49,7 +48,6 @@ const taskService = {
         }
     },
 
-    // Reschedule Email Deliver Date
     async Reschedule_deliver(query, BodyData) {
         try {
             if (!BodyData || !query) {
@@ -86,9 +84,9 @@ const taskService = {
             }
 
             if (params) {
-                const startDate = new Date(params.startDate); // this is the starting date that looks like ISODate("2021-03-11T04:00:00.188Z")
+                const startDate = new Date(params.startDate);
                 oneDay = (1000 * 60 * 60 * 24)
-                today = new Date(startDate - (startDate % oneDay)); // Converting starting date that looks like ISODate("2021-03-11T00:00:00.000Z")
+                today = new Date(startDate - (startDate % oneDay));
                 console.log("today", today)
 
                 const dateMidnight = new Date(today);
@@ -143,9 +141,9 @@ const taskService = {
             }
 
             if (params) {
-                const startDate = new Date(params.startDate); // this is the starting date that looks like ISODate("2021-03-11T04:00:00.188Z")
+                const startDate = new Date(params.startDate);
                 oneDay = (1000 * 60 * 60 * 24)
-                today = new Date(startDate - (startDate % oneDay)); // Converting starting date that looks like ISODate("2021-03-11T00:00:00.000Z")
+                today = new Date(startDate - (startDate % oneDay));
                 console.log("today", today)
 
                 const dateMidnight = new Date(today);
@@ -203,7 +201,7 @@ const taskService = {
             }
             const getObj = await queryDAO.getByConditions(conditions)
             console.log("unDeliveredList", unDeliveredList)
-            
+
             if (getObj.length > 0) {
                 const response = await queryDAO.deleteData(conditions)
                 console.log("response", response)
