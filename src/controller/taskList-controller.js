@@ -73,5 +73,4 @@ route.get('/remove_record/:_id', (req, res) => {
     });
 });
 
-
 module.exports = route;
