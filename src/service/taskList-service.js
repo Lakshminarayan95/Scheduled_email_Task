@@ -191,7 +191,7 @@ const taskService = {
         }
     },
 
-    async getUndelivered_email(params) {
+    async remove_record(params) {
         try {
             if (!params) {
                 return Promise.reject(res.error(406, 'Please enter proper Object Id'));

@@ -28,18 +28,21 @@ async function promiseRequest(methodName, url, json) {
 
 async function notify_users() {
     try {
-        const url = "http://localhost:9005/tasks/getUndelivered_email"
+        var current_date = moment().format("YYYY-MM-DD");
+        const url = "http://localhost:9005/tasks/getUndelivered_email_byDate/" + current_date
 
         var undeliverd_data = await promiseRequest('GET', url, true)
         console.log("undeliverd_data", undeliverd_data);
+
         if (undeliverd_data.status == 200) {
             for (let i = 0; i < undeliverd_data.unDeliveredList.length; i++) {
                 const params = undeliverd_data.unDeliveredList[i]
 
-                let delivery_dates = moment(new Date(params.deliver_date)).format("YYYY-MM-DD");
-                let today = moment(new Date()).format("YYYY-MM-DD");
+                let delivery_dates = moment(new Date(params.deliver_date)).utcOffset("+05:30").format('DD-MMM-YYYY HH:mm');
+                let today = moment(new Date()).utcOffset("+05:30").format('DD-MMM-YYYY HH:mm');
+                console.log("today",today,delivery_dates)
 
-                if (today <= delivery_dates) {
+                if (today == delivery_dates) {
 
                     let emailOptions = emailTemplate.notify_email_delivery(params.email, params.name, params.content, params.deliver_date);
                     emailService.sendMail(emailOptions);
@@ -61,7 +64,7 @@ async function notify_users() {
 
 
 // CRON JOB executed for every day at 06:00 PM
-var task = cron.schedule('00 18 * * *', async function () {
+var task = cron.schedule('* * * * *', async function () {
     notify_users();
 });
 
